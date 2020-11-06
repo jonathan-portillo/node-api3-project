@@ -51,13 +51,17 @@ router.delete("/:id", validateUserId, (req, res) => {
     .remove(req.params.id)
     .then(() =>
       res.status(200).json({ message: `User has been has been deleted` })
-    );
+    )
+    .catch((err) => console.log("Error deleting post", err));
 });
 
 router.put("/:id", validateUserId, validatePost, (req, res) => {
-  user.update(req.params.id, req.body).then(() => {
-    res.status(200).json({ new_username: req.body.name });
-  });
+  user
+    .update(req.params.id, req.body)
+    .then(() => {
+      res.status(200).json({ new_username: req.body.name });
+    })
+    .catch((err) => console.log("Error deleting post", err));
 });
 
 //custom middleware
